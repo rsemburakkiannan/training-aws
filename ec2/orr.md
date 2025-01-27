@@ -164,4 +164,3 @@ We recommend scheduling a detailed kickoff meeting to:
 
 ---
 
-![image](https://github.com/user-attachments/assets/beb16eee-e37c-47a4-b1a9-36808b8148d8)
