@@ -1,0 +1,45 @@
+import scala.sys.process._
+import io.gatling.core.Predef._
+import io.gatling.http.Predef._
+import scala.util.parsing.json.JSON
+import java.util.UUID
+
+class PerformanceTest extends Simulation {
+
+  // Step 1: Execute curl command to get the bearer token
+  def getBearerToken(): String = {
+    val curlCommand = "curl -X POST https://example.com/auth -d 'client_id=abc&client_secret=xyz'"
+    val response = curlCommand.!!  // Execute command and capture output
+    
+    // Extract token assuming JSON response like {"access_token":"your_token_here"}
+    JSON.parseFull(response) match {
+      case Some(data: Map[String, String]) => data.getOrElse("access_token", "")
+      case _ => ""
+    }
+  }
+
+  // Fetch token before starting simulation
+  val token = getBearerToken()
+
+  val httpProtocol = http
+    .baseUrl("https://example.com/api")
+    .acceptHeader("application/json")
+    .authorizationHeader(s"Bearer $token")
+
+  val scn = scenario("Performance Test Scenario")
+    .exec(
+      http("Post Request with Token")
+        .post("/your-endpoint")
+        .body(StringBody(session => {
+          val uniqueId = UUID.randomUUID().toString
+          s"""{
+            \"key1\": \"value1\",
+            \"key2\": \"value2\",
+            \"uniqueKey\": \"$uniqueId\"
+          }"""
+        })).asJson
+        .check(status.is(200))
+    )
+
+  setUp(scn.inject(atOnceUsers(10))).protocols(httpProtocol)
+}
