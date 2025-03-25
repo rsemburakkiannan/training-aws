@@ -318,3 +318,51 @@ class MaskingTest {
 
 ## Conclusion
 This solution provides a comprehensive, flexible approach to masking sensitive data across Java logging frameworks, with minimal performance overhead and maximum configurability.
+
+# Log Masking Approaches Comparative Analysis
+
+## Comprehensive Comparison of Log Masking Techniques
+
+| Approach | Performance | Complexity | Flexibility | Setup Effort | Masking Capability | Best Suited For | Example Use Case |
+|----------|-------------|------------|-------------|--------------|-------------------|----------------|-----------------|
+| **Regex-Based Masking** | Low Overhead (5-10μs) | Low | High | Simple | Precise Pattern Matching | Small to Medium Applications | Masking credit card numbers, emails in log files |
+| **Custom Log Appender** | Medium Overhead (10-50μs) | High | Very High | Complex | Advanced Custom Logic | Large Enterprise Applications | Comprehensive sensitive data protection with complex rules |
+| **MDC (Mapped Diagnostic Context)** | Minimal Overhead (3-8μs) | Medium | Medium | Moderate | Context-Based Masking | Microservices, Distributed Systems | Consistent masking across application layers |
+| **AOP (Aspect-Oriented Programming)** | High Overhead (20-100μs) | Very High | Medium | Complex | Interceptive Masking | Complex Applications with Multiple Logging Points | Cross-cutting logging concerns across multiple modules |
+| **Log Filtering Middleware** | Highest Overhead (50-200μs) | Medium | Low | Moderate | Basic Filtering | Centralized Logging Infrastructures | Network-level log protection |
+
+## Detailed Evaluation Matrix
+
+### Comparative Scoring (★ = Low, ★★★★★ = Excellent)
+
+| Criteria | Regex Masking | Custom Appender | MDC | AOP | Log Middleware |
+|----------|---------------|-----------------|-----|-----|----------------|
+| Performance Impact | ★★★★★ | ★★★☆☆ | ★★★★★ | ★★☆☆☆ | ★☆☆☆☆ |
+| Implementation Complexity | ★★★★☆ | ★★☆☆☆ | ★★★☆☆ | ★★☆☆☆ | ★★★☆☆ |
+| Data Format Flexibility | ★★★★★ | ★★★★☆ | ★★☆☆☆ | ★★★☆☆ | ★★☆☆☆ |
+| Maintenance Overhead | ★★★★☆ | ★★★☆☆ | ★★★☆☆ | ★★☆☆☆ | ★★☆☆☆ |
+
+## Recommended Approach Selection Criteria
+
+1. **Performance Requirements**
+   - Low Overhead: Regex Masking or MDC
+   - Complex Processing: Custom Appender
+   - Minimal Impact: MDC
+
+2. **Application Complexity**
+   - Simple Applications: Regex Masking
+   - Enterprise Systems: Custom Appender or AOP
+   - Microservices: MDC
+
+3. **Data Protection Level**
+   - Basic Protection: Regex Masking
+   - Advanced Protection: Custom Appender
+   - Contextual Protection: MDC
+
+## Recommended Implementation Strategy
+
+| Stage | Action | Approach | Rationale |
+|-------|--------|----------|-----------|
+| Initial | Basic Sensitive Data Masking | Regex-Based | Quick implementation, minimal overhead |
+| Intermediate | Enhanced Protection | Hybrid (Regex + MDC) | Improved accuracy, context-aware masking |
+| Advanced | Comprehensive Solution | Custom Appender with Multiple Strategies | Maximum flexibility, complex masking rules |
