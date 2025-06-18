@@ -26,12 +26,13 @@ This document presents an evaluation of available HTTP client libraries and fram
 
 **3. Candidate Options**
 
-| Option Name                | Description                                                                             |
-| -------------------------- | --------------------------------------------------------------------------------------- |
-| RestTemplate               | Traditional, blocking HTTP client in Spring (deprecated).                               |
-| Spring WebClient           | Non-blocking, reactive WebFlux-based client introduced in Spring 5.                     |
-| OpenFeign (Spring Cloud)   | Declarative REST client with interface-based HTTP calls and pluggable transport.        |
-| Apache HttpClient / OkHttp | Low-level HTTP libraries; can be used standalone or under the covers by other wrappers. |
+| Option Name                | Description                                                                                           |   |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- | - |
+| RestTemplate               | Traditional, blocking HTTP client in Spring (deprecated).                                             |   |
+| RestClient (Spring 6.x)    | New, fluent HTTP client built on Reactor Netty for Spring 6; supports synchronous and reactive usage. |   |
+| Spring WebClient           | Non-blocking, reactive WebFlux-based client introduced in Spring 5.                                   |   |
+| OpenFeign (Spring Cloud)   | Declarative REST client with interface-based HTTP calls and pluggable transport.                      |   |
+| Apache HttpClient / OkHttp | Low-level HTTP libraries; can be used standalone or under the covers by other wrappers.               |   |
 
 ---
 
@@ -51,12 +52,14 @@ This document presents an evaluation of available HTTP client libraries and fram
 
 To help compare all candidates at a glance, the following table summarizes their capabilities across our evaluation criteria:
 
-| Option                       | Performance & Scalability                   | Developer Productivity                     | Ecosystem & Community Support          | Migration Effort                            | Long‑term Viability                   |
-| ---------------------------- | ------------------------------------------- | ------------------------------------------ | -------------------------------------- | ------------------------------------------- | ------------------------------------- |
-| **RestTemplate**             | Low – blocking I/O, thread‑per‑request      | High – familiar, simple API                | Moderate – widely used but deprecated  | Low – existing code, minimal changes        | Low – no future enhancements          |
-| **Spring WebClient**         | High – non‑blocking, reactive back‑pressure | Medium – reactive learning curve           | High – first‑class Spring support      | Medium – refactoring to Flux/Mono           | High – aligned with Spring 5+ roadmap |
-| **OpenFeign (Spring Cloud)** | Medium – blocking, declarative calls        | High – interface‑based, low boilerplate    | High – Spring Cloud ecosystem          | Medium – define interfaces, add annotations | Medium – evolving reactive support    |
-| **Apache HttpClient/OkHttp** | Medium – connection pooling, HTTP/2 support | Low – manual serialization, error handling | Moderate – mature standalone libraries | High – integrate manually, write wrappers   | Medium – stable but not Spring‑first  |
+| Option                                      | Performance & Scalability                                    | Developer Productivity                     | Ecosystem & Community Support             | Migration Effort                                        | Long‑term Viability                   |
+| ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------ | ----------------------------------------- | ------------------------------------------------------- | ------------------------------------- |
+| **RestTemplate**                            | Low – blocking I/O, thread‑per‑request                       | High – familiar, simple API                | Moderate – widely used but deprecated     | Low – existing code, minimal changes                    | Low – no future enhancements          |
+| **Spring WebClient**                        | High – non‑blocking, reactive back‑pressure                  | Medium – reactive learning curve           | High – first‑class Spring support         | Medium – refactoring to Flux/Mono                       | High – aligned with Spring 5+ roadmap |
+| **OpenFeign (Spring Cloud)**                | Medium – blocking, declarative calls                         | High – interface‑based, low boilerplate    | High – Spring Cloud ecosystem             | Medium – define interfaces, add annotations             | Medium – evolving reactive support    |
+| **Apache HttpClient/OkHttp**                | Medium – connection pooling, HTTP/2 support                  | Low – manual serialization, error handling | Moderate – mature standalone libraries    | High – integrate manually, write wrappers               | Medium – stable but not Spring‑first  |
+| **RestClient (Spring 6.x)**                 | Medium‑High – non‑blocking under the hood with Reactor Netty | High – fluent, annotation‑free API         | Medium – new but backed by Spring         | Medium – switch configurations, update bean definitions | High – built into Spring 6 roadmap    |
+| Medium – connection pooling, HTTP/2 support | Low – manual serialization, error handling                   | Moderate – mature standalone libraries     | High – integrate manually, write wrappers | Medium – stable but not Spring‑first                    |                                       |
 
 ---
 
@@ -108,4 +111,8 @@ Based on our evaluation, **Spring WebClient** emerges as the optimal choice for 
 
 Adopting **Spring WebClient** aligns with our strategic goals of performance, scalability, and maintainability. A structured migration plan with a pilot phase, training, and incremental roll-out will ensure minimal disruption. This investment will future-proof our application and provide the flexibility to embrace reactive paradigms as business demands grow.
 
+---
 
+*Prepared by:* Raghu, IT Consultant
+
+*Date:* \[YYYY-MM-DD]
