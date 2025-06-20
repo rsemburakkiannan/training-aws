@@ -352,3 +352,5 @@ These functions must be defined and available in the same schema where this proc
    The process flow diagram would start with the input parameters being passed to the CalculatePortfolioPerformance procedure. The first process would be the calculation of initial and final portfolio values. The next process would be the calculation of total dividends and fees. The third process would be the calculation of total return. The fourth process would be a decision process to check if the initial value is greater than zero. If true, the performance is calculated, else it is set to NULL. The fifth process would be the calculation of the risk metric. The final process would be the output of the performance calculation. If any exception occurs during the process, the exception handling process sets the performance and risk_metric to NULL and outputs an error message.
 
 =================================================
+
+https://github.com/yeongzhiwei/demo-log-masking-spring-boot
